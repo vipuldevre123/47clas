@@ -21,8 +21,9 @@ restartimg = loadImage("restart.png");
 
 function setup() {
   createCanvas(windowWidth,windowHeight);
-  background = createSprite(width/2,height/2,width,height);
-  background.addImage(bgimg);
+  background1 = createSprite(width/2,height/2,width,height);
+  background1.addImage(bgimg);
+  background1.scale = 0.8
   mario = createSprite(50,380,20,20);
   mario.addAnimation("marioimg",marioimg);
   ground = createSprite(width/2,height-80,width,10);
@@ -37,12 +38,12 @@ function setup() {
 }
 
 function draw() {
-  //background(bgimg);
+  background("white");
   
   if (gameState === "play"){
-    background.velocityX = -3;
-    if(background.x<0){
-      background.x = background.width/2;
+    background1.velocityX = -3;
+    if(background1.x<0){
+      background1.x = 700;
     }
     if(keyDown("up_arrow")){
       mario.velocityY = -6;
@@ -82,18 +83,20 @@ function draw() {
     spawnbonus();
   }
   if(gameState === "end"){
-    background.velocityX = 0;
-    background.x = width/2;
-    background.y = height/2;
-    background.addImage(gameoverimg);
+    background1.velocityX = 0;
+    background1.x = width/2;
+    background1.y = height/2;
+   // background1.addImage(gameoverimg);
 enemygroup.destroyEach(0);
 brickgroup.destroyEach(0);
 coingroup.destroyEach(0);
 mario.setVelocity(0,0);  
 mario.visible = false;
 restart.visible = true;
+
 if(mousePressedOver(restart)){
   gameState = "play";
+//  background1.addImage(bgimg);
   restart.visible = false;
 mario.visible = true;
 }
